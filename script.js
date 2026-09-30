@@ -4,7 +4,12 @@ const gameOver = document.querySelector("#gameOver");
 const restartBtn = document.querySelector("#restartBtn");
 const startBtn = document.querySelector("#startBtn");
 const highScoreElement = document.querySelector("#highScore");
-const resetHighScoreBtn = document.querySelector("#resetHighScoreBtn");
+const resetHighScoreBtn = document.querySelector("#resetHighScoreBtn"); 
+//control for mobile
+const upBtn = document.querySelector("#upBtn");
+const downBtn = document.querySelector("#downBtn");
+const leftBtn = document.querySelector("#leftBtn");
+const rightBtn = document.querySelector("#rightBtn");
 const gridSize = 40;
 const totalCells = gridSize * gridSize;
 for (let i = 0; i < totalCells; i++){
@@ -50,6 +55,24 @@ foodCell.classList.add("food")
                 direction = "left"
             }
         });
+        
+
+        //mobile control
+    upBtn.addEventListener("click", () => {
+        if (direction !== "down") direction = "up";
+    });
+
+    downBtn.addEventListener("click", () => {
+        if (direction !== "up") direction = "down";
+    });
+
+    leftBtn.addEventListener("click", () => {
+        if (direction !== "right") direction = "left";
+    });
+
+    rightBtn.addEventListener("click", () => {
+         if (direction !== "left") direction = "right";
+    });
 
 
     let gameLoop;   
