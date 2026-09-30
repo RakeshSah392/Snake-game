@@ -10,6 +10,10 @@ const upBtn = document.querySelector("#upBtn");
 const downBtn = document.querySelector("#downBtn");
 const leftBtn = document.querySelector("#leftBtn");
 const rightBtn = document.querySelector("#rightBtn");
+//difficulty level code
+const easyBtn = document.querySelector("#easyBtn");
+const mediumBtn = document.querySelector("#mediumBtn");
+const hardBtn = document.querySelector("#hardBtn");
 const gridSize = 40;
 const totalCells = gridSize * gridSize;
 for (let i = 0; i < totalCells; i++){
@@ -33,6 +37,7 @@ let food = {
 }
 let score = 0;  
 let highScore = 0;
+let gameSpeed = 200;
 let foodCell = document.querySelector(`.cell[data-x="${food.x}"][data-y="${food.y}"]`)
 foodCell.classList.add("food")
 
@@ -73,7 +78,18 @@ foodCell.classList.add("food")
     rightBtn.addEventListener("click", () => {
          if (direction !== "left") direction = "right";
     });
+    //difficulty control
+    easyBtn.addEventListener("click", () => {
+    setDifficulty(300, easyBtn);
+});
 
+mediumBtn.addEventListener("click", () => {
+    setDifficulty(200, mediumBtn);
+});
+
+hardBtn.addEventListener("click", () => {
+    setDifficulty(100, hardBtn);
+});
 
     let gameLoop;   
     function startGame(){
@@ -176,10 +192,22 @@ snake.forEach(segment => {
     const snakeCell = document.querySelector(`.cell[data-x="${segment.x}"][data-y="${segment.y}"]`)
     snakeCell.classList.add("snake");
 });
-}, 100);
+}, gameSpeed);
 
 
 }
+
+//diffficulty part code
+function setDifficulty(speed, activeButton) {
+    gameSpeed = speed;
+
+    document.querySelectorAll(".difficulty button").forEach(button => {
+        button.classList.remove("active");
+    });
+
+    activeButton.classList.add("active");
+}
+setDifficulty(200, mediumBtn);
 
 function restartGame() {
     clearInterval(gameLoop);
